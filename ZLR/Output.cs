@@ -533,6 +533,8 @@ namespace ZLR.VM
         UnicodeCaps CheckUnicode(char ch);
 
         #endregion
+
+        void SetLocation(ushort locId);
     }
 
     partial class ZMachine

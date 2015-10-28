@@ -471,7 +471,8 @@ namespace ZLR.VM
             if (zversion > 3)
                 return;
 
-            var locationStr = GetObjectName((ushort) GetWord(globalsOffset));
+            var locId = (ushort)GetWord(globalsOffset);
+            var locationStr = GetObjectName(locId);
             var hoursOrScore = GetWord(globalsOffset + 2);
             var minsOrTurns = GetWord(globalsOffset + 4);
 
@@ -485,6 +486,8 @@ namespace ZLR.VM
                 var flags1 = GetByte(0x1);
                 useTime = ((flags1 & 2) != 0);
             }
+
+            io.SetLocation(locId);
 
             // let the I/O module intercept the status line request...
             if (io.DrawCustomStatusLine(locationStr, hoursOrScore, minsOrTurns, useTime) == false)
